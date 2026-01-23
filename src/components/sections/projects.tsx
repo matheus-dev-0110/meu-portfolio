@@ -13,8 +13,8 @@ type Dashboard = {
 }
 
 export default function ProjectsSection() {
-  const { lang } = useLanguage()
-  const t = content[lang]?.projects ?? content.pt.projects
+  const { language } = useLanguage()
+  const t = content[language]?.projects ?? content.pt.projects
 
   const [openDashboard, setOpenDashboard] = useState(false)
   const [selectedDashboard, setSelectedDashboard] =
