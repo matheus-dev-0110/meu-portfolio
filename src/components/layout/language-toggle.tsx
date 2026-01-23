@@ -1,16 +1,16 @@
 "use client"
 
-import { useLanguage } from "@/context/language-context" // ou @/context/language-context, conforme sua pasta
+import { useLanguage } from "@/context/language-context"
 
 export default function LanguageToggle() {
-  const { lang, toggleLang } = useLanguage() // ⚠️ use "lang" e "toggleLang"
+  const { language, toggleLanguage } = useLanguage()
 
   return (
     <button
-      onClick={toggleLang}
-      className="rounded-lg border border-white/20 px-3 py-1 text-sm text-white transition hover:bg-white/10"
+      onClick={toggleLanguage}
+      className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm text-white transition hover:bg-white/10"
     >
-      {lang === "pt" ? "EN" : "PT"}
+      {language === "pt" ? "EN" : "PT"}
     </button>
   )
 }
