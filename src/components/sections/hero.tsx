@@ -12,7 +12,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#0B0E14] pt-32 pb-24 md:min-h-screen md:pt-0 md:pb-0"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-32 pb-24 md:min-h-screen md:pt-0 md:pb-0"
     >
       {/* Background blur */}
       <div className="pointer-events-none absolute inset-0">
@@ -28,11 +28,11 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
           className="flex max-w-xl flex-col items-center gap-6 text-center md:items-start md:text-left"
         >
-          <span className="text-xs uppercase tracking-widest text-purple-400 sm:text-sm">
+          <span className="text-xs uppercase tracking-widest text-slate-400 sm:text-sm">
             {t.role}
           </span>
 
-          <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl">
+          <h1 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-6xl">
             Matheus Henrique <br />
             <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
               Nóbrega Fernandes
@@ -67,13 +67,13 @@ export default function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="relative"
         >
-          <div className="relative h-[300px] w-[230px] sm:h-[360px] sm:w-[280px] md:h-[420px] md:w-[320px] rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 p-2 shadow-2xl">
+          <div className="relative h-[300px] w-[300px] sm:h-[360px] sm:w-[360px] md:h-[420px] md:w-[420px] rounded-full bg-gradient-to-b from-slate-800 to-slate-900 p-2 shadow-2xl overflow-hidden">
             <Image
               src="/profile.jpg"
               alt="Matheus Nóbrega"
               fill
               priority
-              className="rounded-xl object-cover"
+              className="rounded-full object-cover"
             />
           </div>
         </motion.div>

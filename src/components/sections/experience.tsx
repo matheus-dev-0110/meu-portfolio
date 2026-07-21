@@ -9,7 +9,7 @@ export default function ExperienceSection() {
   const t = content[language].experience
 
   return (
-    <section id="experience" className="bg-[#0B0E14] py-24 md:py-32">
+    <section id="experience" className="bg-[#0B0E14] py-28 md:py-32 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 className="mb-16 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
           {t.title}
@@ -31,7 +31,7 @@ export default function ExperienceSection() {
               </div>
 
               <div className="flex-1">
-                <span className="text-xs text-purple-400 sm:text-sm">
+                <span className="text-xs text-slate-400 sm:text-sm">
                   {exp.period}
                 </span>
 
@@ -53,7 +53,7 @@ export default function ExperienceSection() {
                   {exp.tech.map((tech) => (
                     <span
                       key={tech}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
+                      className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-white"
                     >
                       {tech}
                     </span>

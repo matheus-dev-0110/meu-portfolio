@@ -9,7 +9,7 @@ export default function AboutSection() {
   const t = content[language].about
 
   return (
-    <section id="about" className="relative bg-[#0B0E14] py-24 md:py-32">
+    <section id="about" className="relative bg-[#0B0E14] py-28 md:py-32 border-t border-white/5">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

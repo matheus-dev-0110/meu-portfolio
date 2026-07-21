@@ -9,7 +9,7 @@ export default function SkillsSection() {
   const t = content[language].skills
 
   return (
-    <section id="skills" className="bg-[#0E1118] py-24 md:py-32">
+    <section id="skills" className="bg-[#0E1118] py-28 md:py-32 border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 className="mb-10 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
           {t.title}
@@ -22,7 +22,7 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             className="rounded-2xl border border-white/10 bg-black/40 p-5 md:p-6 backdrop-blur-xl"
           >
-            <h3 className="mb-4 text-lg font-semibold text-purple-400 sm:text-xl">
+            <h3 className="mb-4 text-lg font-semibold text-slate-400 sm:text-xl">
               {t.analyst}
             </h3>
 
@@ -39,7 +39,7 @@ export default function SkillsSection() {
             viewport={{ once: true }}
             className="rounded-2xl border border-white/10 bg-black/40 p-5 md:p-6 backdrop-blur-xl"
           >
-            <h3 className="mb-4 text-lg font-semibold text-purple-400 sm:text-xl">
+            <h3 className="mb-4 text-lg font-semibold text-slate-400 sm:text-xl">
               {t.engineer}
             </h3>
 

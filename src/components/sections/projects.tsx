@@ -23,11 +23,11 @@ export default function ProjectsSection() {
   const featuredImage = t.featured.diagramImg ?? "/projects/pipeline-architecture.png"
 
   return (
-    <section id="projects" className="py-32 bg-[#0B0E14]">
+    <section id="projects" className="py-28 md:py-32 bg-[#0B0E14] border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6">
 
         {/* ================= TÍTULO ================= */}
-        <h2 className="mb-16 text-3xl font-bold text-white md:text-4xl">
+        <h2 className="mb-16 text-4xl font-bold text-white md:text-5xl">
           {t.title}
         </h2>
 
@@ -42,24 +42,24 @@ export default function ProjectsSection() {
 
             {/* TEXTO */}
             <div>
-              <h3 className="mb-4 text-2xl font-semibold text-white">
+              <h3 className="mb-4 text-3xl font-semibold text-white">
                 {t.featured.title}
               </h3>
 
               <div className="space-y-6 text-white/70 leading-relaxed">
                 <p>
-                  <strong className="text-white">Desafio:</strong><br />
-                  {t.featured.challenge}
+                  <strong className="text-sm text-slate-400 uppercase tracking-wide">Desafio:</strong><br />
+                  <span className="text-slate-300">{t.featured.challenge}</span>
                 </p>
 
                 <p className="whitespace-pre-line">
-                  <strong className="text-white">Solução Técnica:</strong><br />
-                  {t.featured.solution}
+                  <strong className="text-sm text-slate-400 uppercase tracking-wide">Solução Técnica:</strong><br />
+                  <span className="text-slate-300 whitespace-pre-line">{t.featured.solution}</span>
                 </p>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <h4 className="mb-3 text-sm font-semibold text-white">Antes</h4>
+                    <h4 className="mb-3 text-sm font-semibold text-slate-400 uppercase">Antes</h4>
                     <ul className="space-y-2 text-sm text-slate-300">
                       {t.featured.before.map((item) => (
                         <li key={item}>• {item}</li>
@@ -68,7 +68,7 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <h4 className="mb-3 text-sm font-semibold text-white">Depois</h4>
+                    <h4 className="mb-3 text-sm font-semibold text-slate-400 uppercase">Depois</h4>
                     <ul className="space-y-2 text-sm text-slate-300">
                       {t.featured.after.map((item) => (
                         <li key={item}>• {item}</li>
@@ -78,8 +78,8 @@ export default function ProjectsSection() {
                 </div>
 
                 <p className="whitespace-pre-line">
-                  <strong className="text-white">Impacto:</strong><br />
-                  {t.featured.impact}
+                  <strong className="text-sm text-slate-400 uppercase tracking-wide">Impacto:</strong><br />
+                  <span className="text-slate-300 whitespace-pre-line">{t.featured.impact}</span>
                 </p>
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function ProjectsSection() {
         )}
 
         {/* ================= SETA / HIERARQUIA ================= */}
-        <div className="my-14 flex flex-col items-center text-purple-400">
+        <div className="my-14 flex flex-col items-center text-slate-400">
           <ArrowDown size={36} />
           <span className="mt-2 text-sm uppercase tracking-wide opacity-80">
             {t.caseDashboards.title}
