@@ -224,7 +224,7 @@ export default function ProjectsSection() {
                   <div className="relative h-44 w-full overflow-hidden rounded-lg">
                     <Image src={dash.img} alt={dash.name} fill className="object-cover" />
                   </div>
-                  {dash.html && (
+                  {'html' in dash && dash.html && (
                     <p className="mt-3 text-xs text-slate-500">Clique para abrir preview interativo.</p>
                   )}
                 </div>
