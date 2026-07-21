@@ -9,52 +9,66 @@ export default function ExperienceSection() {
   const t = content[language].experience
 
   return (
-    <section id="experience" className="bg-[#0B0E14] py-28 md:py-32 border-t border-white/5">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 className="mb-16 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-          {t.title}
-        </h2>
+    <section id="experience" className="section-divider py-28 md:py-36" style={{ background: "var(--bg-base)" }}>
+      <div className="mx-auto max-w-4xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-14"
+        >
+          <span className="section-label">Trajetória</span>
+          <h2 className="font-display mt-2 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            {t.title}
+          </h2>
+        </motion.div>
 
-        <div className="space-y-16 md:space-y-20">
+        <div className="space-y-14">
           {t.items.map((exp, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex gap-6 md:gap-8"
             >
-              <div className="relative flex flex-col items-center">
-                <span className="absolute top-0 h-full w-px bg-white/10" />
-                <span className="relative z-10 mt-1 h-3 w-3 rounded-full bg-purple-500" />
+              {/* Timeline */}
+              <div className="relative flex flex-col items-center pt-1">
+                <span
+                  className="absolute top-0 h-full w-px"
+                  style={{ background: "rgba(255,255,255,0.06)" }}
+                />
+                <span className="relative z-10 h-3 w-3 rounded-full timeline-dot" />
               </div>
 
-              <div className="flex-1">
-                <span className="text-xs text-slate-400 sm:text-sm">
-                  {exp.period}
-                </span>
+              {/* Conteúdo */}
+              <div className="flex-1 pb-2">
+                <span className="text-xs text-slate-500 sm:text-sm">{exp.period}</span>
 
-                <h3 className="mt-2 text-lg font-semibold text-white sm:text-xl">
+                <h3 className="font-display mt-1.5 text-lg font-semibold text-white sm:text-xl">
                   {exp.role}
                 </h3>
 
-                <p className="mb-4 text-sm text-slate-400 sm:text-base">
+                <p className="mb-4 text-sm font-medium" style={{ color: "var(--accent)" }}>
                   {exp.company}
                 </p>
 
-                <ul className="mb-4 list-disc space-y-2 pl-5 text-sm text-slate-300 sm:text-base">
+                <ul className="mb-5 space-y-2">
                   {exp.description.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-slate-400 sm:text-base">
+                      <span
+                        className="mt-2 h-1.5 w-1.5 rounded-full shrink-0"
+                        style={{ background: "var(--accent)" }}
+                      />
+                      {item}
+                    </li>
                   ))}
                 </ul>
 
                 <div className="flex flex-wrap gap-2">
                   {exp.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs text-white"
-                    >
+                    <span key={tech} className="tech-badge">
                       {tech}
                     </span>
                   ))}

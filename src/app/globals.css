@@ -1,60 +1,161 @@
 @import "tailwindcss";
 
 /* ========================= */
-/* BASE GLOBAL */
+/* FONTS */
 /* ========================= */
-html,
-body {
-  background-color: #020617; /* slate-950 */
-  color: #f8fafc; /* slate-50 */
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  /* Accent palette — azul elétrico */
+  --accent: #00B4FF;
+  --accent-dim: #0077AA;
+  --accent-glow: rgba(0, 180, 255, 0.18);
+  --accent-2: #00E5FF;
+  --bg-base: #060A12;
+  --bg-card: rgba(10, 16, 28, 0.7);
+  --border: rgba(255, 255, 255, 0.07);
+}
+
+html, body {
+  background-color: var(--bg-base);
+  color: #f0f4f8;
   scroll-behavior: smooth;
+  font-family: var(--font-inter);
 }
 
 /* ========================= */
-/* SCROLLBAR MODERNA (SAFE) */
+/* SCROLLBAR */
 /* ========================= */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #020617;
-}
-
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7c3aed, #4f46e5);
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
   border-radius: 10px;
 }
 
 /* ========================= */
-/* FUNDO SUTIL ANIMADO */
+/* DISPLAY FONT */
 /* ========================= */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.font-display {
+  font-family: var(--font-display);
 }
 
-.bg-animated {
-  background: radial-gradient(
-      circle at 20% 20%,
-      rgba(124, 58, 237, 0.12),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(79, 70, 229, 0.12),
-      transparent 40%
-    );
-  animation: gradientMove 20s ease infinite;
-}
-@keyframes textGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ========================= */
+/* DOT GRID — assinatura visual */
+/* ========================= */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0,180,255,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.animate-gradient-text {
-  background-size: 200% 200%;
-  animation: textGradient 6s ease infinite;
+/* ========================= */
+/* GLOW ACCENT */
+/* ========================= */
+.glow-accent {
+  text-shadow: 0 0 40px rgba(0, 180, 255, 0.4);
+}
+
+/* ========================= */
+/* GRADIENT TEXT */
+/* ========================= */
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================= */
+/* CARD BASE */
+/* ========================= */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+}
+
+.card-hover {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card-hover:hover {
+  border-color: rgba(0,180,255,0.3);
+  box-shadow: 0 0 24px rgba(0,180,255,0.08);
+}
+
+/* ========================= */
+/* SECTION DIVIDER */
+/* ========================= */
+.section-divider {
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ========================= */
+/* ACCENT BUTTON */
+/* ========================= */
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  color: #fff;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 12px 28px;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.btn-accent:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 20px rgba(0,180,255,0.3);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 12px 28px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--accent);
+}
+
+/* ========================= */
+/* TIMELINE DOT */
+/* ========================= */
+.timeline-dot {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 12px rgba(0,180,255,0.5);
+}
+
+/* ========================= */
+/* BADGE TECH */
+/* ========================= */
+.tech-badge {
+  border: 1px solid rgba(0,180,255,0.25);
+  background: rgba(0,180,255,0.06);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ========================= */
+/* SKILL CARD HIGHLIGHT */
+/* ========================= */
+.skill-card-primary {
+  border: 1px solid rgba(0,180,255,0.2);
+  background: rgba(0,180,255,0.04);
+}
+
+/* ========================= */
+/* SECTION LABEL */
+/* ========================= */
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
 }

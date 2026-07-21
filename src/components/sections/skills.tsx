@@ -9,43 +9,59 @@ export default function SkillsSection() {
   const t = content[language].skills
 
   return (
-    <section id="skills" className="bg-[#0E1118] py-28 md:py-32 border-t border-white/5">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 className="mb-10 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-          {t.title}
-        </h2>
+    <section id="skills" className="section-divider py-28 md:py-36" style={{ background: "#080C16" }}>
+      <div className="mx-auto max-w-6xl px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <span className="section-label">Stack</span>
+          <h2 className="font-display mt-2 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            {t.title}
+          </h2>
+        </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2">
+          {/* Card principal — DE & Cloud */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-white/10 bg-black/40 p-5 md:p-6 backdrop-blur-xl"
+            transition={{ delay: 0.05 }}
+            className="card card-hover skill-card-primary p-6 md:p-8"
           >
-            <h3 className="mb-4 text-lg font-semibold text-slate-400 sm:text-xl">
-              {t.analyst}
+            <h3 className="mb-5 font-display text-base font-semibold" style={{ color: "var(--accent)" }}>
+              {t.engineer}
             </h3>
-
-            <ul className="space-y-2 text-sm text-slate-300 sm:text-base">
-              {t.analystSkills.map((skill) => (
-                <li key={skill}>• {skill}</li>
+            <ul className="space-y-3">
+              {t.engineerSkills.map((skill) => (
+                <li key={skill} className="flex items-center gap-3 text-sm text-slate-300 sm:text-base">
+                  <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: "var(--accent)" }} />
+                  {skill}
+                </li>
               ))}
             </ul>
           </motion.div>
 
+          {/* Card secundário — Analytics */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-white/10 bg-black/40 p-5 md:p-6 backdrop-blur-xl"
+            transition={{ delay: 0.12 }}
+            className="card card-hover p-6 md:p-8"
           >
-            <h3 className="mb-4 text-lg font-semibold text-slate-400 sm:text-xl">
-              {t.engineer}
+            <h3 className="mb-5 font-display text-base font-semibold text-slate-400">
+              {t.analyst}
             </h3>
-
-            <ul className="space-y-2 text-sm text-slate-300 sm:text-base">
-              {t.engineerSkills.map((skill) => (
-                <li key={skill}>• {skill}</li>
+            <ul className="space-y-3">
+              {t.analystSkills.map((skill) => (
+                <li key={skill} className="flex items-center gap-3 text-sm text-slate-400 sm:text-base">
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-600 shrink-0" />
+                  {skill}
+                </li>
               ))}
             </ul>
           </motion.div>

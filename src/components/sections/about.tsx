@@ -9,26 +9,29 @@ export default function AboutSection() {
   const t = content[language].about
 
   return (
-    <section id="about" className="relative bg-[#0B0E14] py-28 md:py-32 border-t border-white/5">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+    <section id="about" className="relative section-divider py-28 md:py-36" style={{ background: "var(--bg-base)" }}>
+      <div className="mx-auto max-w-4xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col gap-5 md:gap-6"
+          className="flex flex-col gap-6"
         >
-          <h2 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+          <span className="section-label">Quem sou</span>
+
+          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl leading-tight">
             {t.title}
           </h2>
 
-          <p className="text-base leading-relaxed text-slate-300 sm:text-lg">
-            {t.p1}
-          </p>
-
-          <p className="text-base leading-relaxed text-slate-300 sm:text-lg">
-            {t.p2}
-          </p>
+          <div className="mt-2 space-y-4">
+            <p className="text-base leading-relaxed text-slate-400 sm:text-lg">
+              {t.p1}
+            </p>
+            <p className="text-base leading-relaxed text-slate-400 sm:text-lg">
+              {t.p2}
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>
