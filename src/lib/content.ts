@@ -12,7 +12,7 @@ export const content = {
     hero: {
       role: "Engenheiro de Dados | SQL | Databricks | Python | ETL/ELT",
       description:
-        "Migro arquiteturas legadas para lakehouses modernos, construo pipelines ETL/ELT em escala e garanto governança de dados em Azure e Databricks.",
+        "Migro arquiteturas legadas para lakehouses modernos, construo pipelines ETL/ELT em escala e lidero projetos em saúde suplementar com ClickHouse/Databricks.",
       projectsBtn: "Ver Projetos",
       contactBtn: "Entrar em Contato",
     },
@@ -20,7 +20,7 @@ export const content = {
     about: {
       title: "Sobre mim",
       p1: `Engenheiro de Dados com foco em migração de arquiteturas legadas para ambientes lakehouse modernos. Trabalho com pipelines ETL/ELT escaláveis, compatibilidade de dialetos SQL e governança de dados em Azure, Databricks e Delta Lake.`,
-      p2: `Tenho experiência em modelagem de tabelas materializadas em Delta Lake com Unity Catalog, gestão de credenciais via Azure Key Vault e entrega de relatórios estratégicos em Power BI. Meu objetivo é tornar o dado confiável, acessível e pronto para decisões mais rápidas e assertivas.`,
+      p2: `Resolvo migrações de stacks ClickHouse/Databricks no setor de saúde suplementar, eliminando incompatibilidades de dialectos SQL e separando ingestão, transformação e consumo em camadas mais seguras. Meu diferencial é unir execução técnica em Databricks/PySpark com visão de negócio e automação real em Power BI.`,
     },
 
     experience: {
@@ -56,23 +56,46 @@ export const content = {
 projects: {
       title: "Projetos de Destaques",
       featured: {
-        title: "Do Caos ao KPI: A Transformação Digital da Operação",
-        challenge: "A tomada de decisão era refém de processos manuais e planilhas descentralizadas. A equipe perdia as primeiras 4 horas do dia apenas minerando dados de APIs, sites e servidores SFTP. O resultado era uma latência de 24 horas na informação e uma margem de erro humano que comprometia a confiabilidade dos KPIs.",
-        solution: `Para romper esse gargalo, projetei uma infraestrutura de dados escalável e resiliente:
-                  • Orquestração Inteligente: Implementei o Prefect para gerenciar o fluxo de dados de ponta a ponta, garantindo que falhas em APIs ou SFTPs fossem tratadas automaticamente sem interromper a operação.
-                  • Engine de Processamento: Desenvolvi o motor de transformação em Python. Utilizei Polars para garantir alta performance no processamento de grandes volumes, realizando o Data Wrangling e a normalização dos dados brutos.
-                  • Warehouse de Alta Performance: Estruturei o Data Warehouse em SQL Server sob a arquitetura Star Schema, utilizando Stored Procedures para otimizar o cálculo de métricas pesadas diretamente no servidor.
-                  • Inteligência Visual: Finalizei com dashboards em Power BI, onde utilizei DAX avançado para criar visões preditivas e operacionais em Tempo Real.`,
-        impact: `• Ganho de Eficiência: A automação eliminou o trabalho manual, gerando um aumento real de 20% na produção da área digital.
-                 • Confiança nos Dados: Reduzi a latência de 24h para Tempo Real, permitindo correções de rota imediatas.
-                 • ROI Operacional: A eliminação de erros manuais poupou dezenas de horas mensais de retrabalho do time de liderança.`
+        title: "Migração de Arquitetura ETL (Strangler Fig)",
+        challenge: "Arquitetura monolítica em ClickHouse unia ingestão, transformação e visualização em um mesmo fluxo, elevando a dependência de dialectos SQL específicos e o risco de alteração em produção.",
+        solution: `Implementei a migração Strangler Fig para isolar cargas de trabalho e reduzir risco técnico:
+                  • Antes: GAIO DataOS (ClickHouse) executava ingestão + transformação + visualização em única camada.
+                  • Depois: Databricks/PySpark assume ETL e transformação, enquanto Delta Lake fica com o armazenamento materializado.
+                  • Governança: Unity Catalog organiza metadados, Azure Key Vault centraliza credenciais e ADLS armazena dados brutos e processados.
+                  • Compatibilidade SQL: Harmonizei consultas entre ClickHouse, Snowflake e T-SQL para manter a produção em operação durante o corte gradual.`,
+        before: [
+          "GAIO DataOS (ClickHouse) com ingestão, transformação e visualização juntos.",
+          "Dependência de dialectos SQL específicos e arquitetura monolítica.",
+          "Deploy lento e alto risco para mudanças em pipelines de produção."
+        ],
+        after: [
+          "Databricks/PySpark assume ETL e transformação.",
+          "Delta Lake materializa tabelas com Unity Catalog.",
+          "GAIO permanece apenas como camada de consumo/visualização.",
+          "Azure Key Vault centraliza credenciais e reduz exposição."
+        ],
+        impact: `• Redução de risco: a troca gradual permitiu execução segura sem interrupção dos relatórios.
+                 • Governança robusta: Unity Catalog e ADLS deram visibilidade de dados para governança.
+                 • Operação mais ágil: o pipeline desacoplado acelerou mudanças de dados e simplificou suporte.`
+      },
+      secondary: {
+        title: "Transformação Digital Operacional",
+        challenge: "A tomada de decisão era refém de processos manuais e planilhas descentralizadas. A equipe perdia as primeiras 4 horas do dia apenas minerando dados de APIs, sites e servidores SFTP.",
+        solution: `Projetei uma infraestrutura de dados escalável e resiliente:
+                  • Orquestração Inteligente: Implementei Prefect para gerenciar o fluxo de dados de ponta a ponta.
+                  • Engine de Processamento: Desenvolvi transformação em Python com Polars para normalização e performance.
+                  • Warehouse de Alta Performance: Estruturei o Data Warehouse em SQL Server em Star Schema.
+                  • Inteligência Visual: Criei dashboards em Power BI com DAX avançado para visões operacionais em tempo real.`,
+        impact: `• Ganho de eficiência: eliminei trabalho manual e aumentei a produção da área digital.
+                 • Confiança nos dados: reduzi latência de 24h para relatórios mais rápidos.
+                 • ROI operacional: reduzi horas de retrabalho na equipe de liderança.`
       },
       caseDashboards: {
-            title: "Dashboards generated from this project",
+            title: "Resultados visuais e dashboards",
             items: [
-            { name: "Executive Overview", img: "/dashboards/capa-v2.png" },
-            { name: "Dispatch KPIs", img: "/dashboards/disparo-v2.png" },
-            { name: "Return KPIs", img: "/dashboards/retorno-v2.png" }
+            { name: "Capa Executiva", img: "/dashboards/capa-v2.png" },
+            { name: "KPIs de Disparos", img: "/dashboards/disparo-v2.png" },
+            { name: "KPIs de Retorno", img: "/dashboards/retorno-v2.png" }
             ]
         },
 
@@ -89,21 +112,21 @@ projects: {
 
     skills: {
       title: "Competências",
-      analyst: "Business Intelligence & Reporting",
+      analyst: "Analytics & BI",
       engineer: "Data Engineering & Cloud",
       analystSkills: [
-        "Power BI Avançado (Modelagem, DAX e relatórios interativos)",
+        "Power BI Avançado (DAX e relatórios interativos)",
+        "Modelagem dimensional e SQL avançado",
         "Análise de KPIs e performance operacional",
-        "Data Storytelling e dashboards estratégicos",
-        "Excel Avançado e automações",
-        "Governança de dados e qualidade de informação"
+        "Data storytelling e dashboards estratégicos",
+        "Excel Avançado e automação"
       ],
       engineerSkills: [
-        "Arquitetura de pipelines ETL / ELT",
-        "Python (Pandas, Polars, PySpark)",
-        "Databricks, Azure Data Lake e Delta Lake",
-        "Modelagem dimensional e compatibilidade SQL",
-        "Orquestração e automação de dados"
+        "ClickHouse e PySpark",
+        "Delta Lake e Unity Catalog",
+        "Azure Key Vault e ADLS",
+        "Databricks e ETL/ELT em escala",
+        "Compatibilidade entre dialectos SQL"
       ]
     },
     contact: {
@@ -133,7 +156,7 @@ projects: {
     hero: {
       role: "Data Engineer | SQL | Databricks | Python | ETL/ELT",
       description:
-        "I migrate legacy architectures to modern lakehouses, building scalable ETL/ELT pipelines and ensuring data governance in Azure and Databricks.",
+        "I migrate legacy architectures to modern lakehouses, build scalable ETL/ELT pipelines, and lead supplemental health projects with ClickHouse/Databricks.",
       projectsBtn: "View Projects",
       contactBtn: "Get in Touch",
     },
@@ -141,7 +164,7 @@ projects: {
     about: {
       title: "About me",
       p1: `Data Engineer focused on migrating legacy architectures to modern lakehouse environments. I build scalable ETL/ELT pipelines, manage SQL dialect compatibility, and enforce data governance with Azure, Databricks and Delta Lake.`,
-      p2: `I have experience modeling materialized tables in Delta Lake with Unity Catalog, managing secrets via Azure Key Vault, and delivering strategic reports in Power BI. My goal is to make data reliable, accessible and ready for faster, more accurate decisions.`,
+      p2: `I solve legacy stack migrations and SQL dialect divergence in supplemental health operations, separating ingestion, transformation and consumption into safer, faster data layers. My edge is combining Databricks/PySpark execution with meaningful visibility in Power BI.`,
     },
 
     experience: {
@@ -212,21 +235,21 @@ projects: {
 
     skills: {
       title: "Skills",
-      analyst: "Business Intelligence & Reporting",
+      analyst: "Analytics & BI",
       engineer: "Data Engineering & Cloud",
       analystSkills: [
-        "Advanced Power BI (Modeling, DAX and interactive reports)",
+        "Advanced Power BI (DAX and interactive reports)",
+        "Dimensional modeling and advanced SQL",
         "KPI analysis and operational performance",
         "Data storytelling and strategic dashboards",
-        "Advanced Excel and automation",
-        "Data governance and information quality"
+        "Advanced Excel and automation"
       ],
       engineerSkills: [
-        "ETL / ELT pipeline architecture",
-        "Python (Pandas, Polars, PySpark)",
-        "Databricks, Azure Data Lake and Delta Lake",
-        "Dimensional modeling and SQL compatibility",
-        "Orchestration and automation of data workflows"
+        "ClickHouse and PySpark",
+        "Delta Lake and Unity Catalog",
+        "Azure Key Vault and ADLS",
+        "Databricks and scalable ETL/ELT",
+        "SQL dialect compatibility"
       ]
     },
 
