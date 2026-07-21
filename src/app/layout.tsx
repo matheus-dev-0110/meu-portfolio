@@ -9,8 +9,8 @@ import { LanguageProvider } from "@/context/language-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Portfólio | Profissional de Dados",
-  description: "Analista e Engenheiro de Dados",
+  title: "Matheus Nóbrega Fernandes | Engenheiro de Dados",
+  description: "Engenheiro de Dados com foco em arquiteturas lakehouse, ETL/ELT e governança em Azure e Databricks",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

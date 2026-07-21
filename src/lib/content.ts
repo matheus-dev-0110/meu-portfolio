@@ -10,50 +10,45 @@ export const content = {
       contact: "Contato",
     },
     hero: {
-      role: "Engenheiro | Analista de Dados",
+      role: "Engenheiro de Dados | SQL | Databricks | Python | ETL/ELT",
       description:
-        "Atuo com análise, engenharia e visualização de dados, criando soluções que transformam informação em valor estratégico.",
+        "Migro arquiteturas legadas para lakehouses modernos, construo pipelines ETL/ELT em escala e garanto governança de dados em Azure e Databricks.",
       projectsBtn: "Ver Projetos",
       contactBtn: "Entrar em Contato",
     },
 
     about: {
       title: "Sobre mim",
-      p1: `Especialista em Dados focado na construção de arquiteturas escaláveis e na
-      entrega de inteligência estratégica. Minha atuação abrange desde a ingestão e
-      ETL/ELT via APIs (REST) com Python (Pandas, Polars), até a modelagem
-      dimensional em SQL Server (T-SQL) e visualização avançada em Power BI.`,
-      p2: `Com certificação em Big Data & Analytics e Business Intelligence pela FIAP, sou especialista em otimizar
-      performance e automatizar processos manuais, transformando fluxos legados em
-      pipelines de Tempo Real. Unindo o rigor técnico da engenharia com a visão
-      analítica de negócio, garanto que o dado percorra o caminho mais eficiente da
-      extração ao insight estratégico.`,
+      p1: `Engenheiro de Dados com foco em migração de arquiteturas legadas para ambientes lakehouse modernos. Trabalho com pipelines ETL/ELT escaláveis, compatibilidade de dialetos SQL e governança de dados em Azure, Databricks e Delta Lake.`,
+      p2: `Tenho experiência em modelagem de tabelas materializadas em Delta Lake com Unity Catalog, gestão de credenciais via Azure Key Vault e entrega de relatórios estratégicos em Power BI. Meu objetivo é tornar o dado confiável, acessível e pronto para decisões mais rápidas e assertivas.`,
     },
 
     experience: {
       title: "Experiência Profissional",
       items: [
         {
-          period: "2024 — 2025",
-          role: "Analista de Dados | MIS",
-          company: "Winover Call Center",
+          period: "2026 — Atual",
+          role: "Engenheiro de Dados Pleno III",
+          company: "QSOFT",
           description: [
-            "Engenharia de Dados: Desenvolvimento de pipelines de ETL com Python para integração de APIs e fornecedores externos.",
-            "Banco de Dados: Otimização de Stored Procedures e modelagem de tabelas em SQL Server.",
-            "Automação: Redução drástica no tempo de processamento com scripts Python.",
-            "Business Intelligence: Criação de dashboards em Power BI para suporte estratégico."
+            "Migração de pipelines ETL de ClickHouse (GAIO DataOS) para Databricks/PySpark usando o padrão Strangler Fig.",
+            "Modelagem e materialização de dados em Delta Lake com Unity Catalog e gestão de credenciais no Azure Key Vault.",
+            "Resolução de incompatibilidades de dialeto SQL entre Snowflake, T-SQL e ClickHouse em pipelines críticos de produção.",
+            "Sustentação e evolução de arquitetura com Azure Data Lake Storage, Azure Blob Storage e Azure DevOps."
           ],
-          tech: ["SQL", "Power BI", "Excel", "Python"]
+          tech: ["Databricks", "Azure", "Python", "SQL"]
         },
         {
-          period: "2023 — 2024",
-          role: "Supervisor de Operações e Backoffice",
+          period: "2024 — 2025",
+          role: "Analista de Dados",
           company: "Winover Call Center",
           description: [
-            "Supervisão de equipes de cobrança e vendas do Santander.",
-            "Gestão de equipe administrativa e atendimento especializado."
+            "Desenvolvimento e manutenção de dashboards em Power BI para apoiar operações e inteligência de dados.",
+            "Execução de processos de ETL em SQL Server e integração de bases complexas com Excel avançado.",
+            "Automação em Python para coleta, tratamento e alertas, fortalecendo a qualidade dos dados.",
+            "Participação em projetos de inovação com aplicação de Inteligência Artificial."
           ],
-          tech: ["Liderança", "SQL", "ETL", "Excel"]
+          tech: ["Power BI", "SQL Server", "Python", "Excel"]
         }
       ]
     },
@@ -73,11 +68,11 @@ projects: {
                  • ROI Operacional: A eliminação de erros manuais poupou dezenas de horas mensais de retrabalho do time de liderança.`
       },
       caseDashboards: {
-            title: "Dashboards gerados a partir deste projeto",
+            title: "Dashboards generated from this project",
             items: [
-            { name: "Capa Executiva", img: "/dashboards/capa-v2.png" },
-            { name: "KPIs de Disparos", img: "/dashboards/disparo-v2.png" },
-            { name: "KPIs de Retorno", img: "/dashboards/retorno-v2.png" }
+            { name: "Executive Overview", img: "/dashboards/capa-v2.png" },
+            { name: "Dispatch KPIs", img: "/dashboards/disparo-v2.png" },
+            { name: "Return KPIs", img: "/dashboards/retorno-v2.png" }
             ]
         },
 
@@ -94,21 +89,21 @@ projects: {
 
     skills: {
       title: "Competências",
-      analyst: "Analytics & Intelligence",
-      engineer: "Data Engineering & Architecture",
+      analyst: "Business Intelligence & Reporting",
+      engineer: "Data Engineering & Cloud",
       analystSkills: [
-        "T-SQL (Complex Queries & Otimização)",
-        "Power BI Avançado (Modelagem & DAX)",
-        "Análise de KPIs & Métricas de Performance",
-        "Data Storytelling & Dashboards Estratégicos",
-        "Estatística Descritiva & Análise Exploratória"
+        "Power BI Avançado (Modelagem, DAX e relatórios interativos)",
+        "Análise de KPIs e performance operacional",
+        "Data Storytelling e dashboards estratégicos",
+        "Excel Avançado e automações",
+        "Governança de dados e qualidade de informação"
       ],
       engineerSkills: [
-        "Python (Pandas, Polars & Automação)",
-        "Arquitetura de Pipelines ETL / ELT",
-        "Modelagem Dimensional (Star Schema & Snowflake)",
-        "Integração via APIs (REST) & Web Scraping",
-        "Data Wrangling & Tratamento de Dados Escaláveis"
+        "Arquitetura de pipelines ETL / ELT",
+        "Python (Pandas, Polars, PySpark)",
+        "Databricks, Azure Data Lake e Delta Lake",
+        "Modelagem dimensional e compatibilidade SQL",
+        "Orquestração e automação de dados"
       ]
     },
     contact: {
@@ -136,49 +131,45 @@ projects: {
       contact: "Contact",
     },
     hero: {
-      role: "Data Engineer | Data Analyst",
+      role: "Data Engineer | SQL | Databricks | Python | ETL/ELT",
       description:
-        "I work with data analysis, engineering, and visualization, creating solutions that turn information into strategic value.",
+        "I migrate legacy architectures to modern lakehouses, building scalable ETL/ELT pipelines and ensuring data governance in Azure and Databricks.",
       projectsBtn: "View Projects",
       contactBtn: "Get in Touch",
     },
 
     about: {
       title: "About me",
-      p1: `Data Specialist focused on building scalable architectures and delivering strategic
-      intelligence. My expertise spans from ingestion and ETL/ELT via REST APIs using
-      Python (Pandas, Polars) to dimensional modeling in SQL Server (T-SQL) and
-      advanced visualization with Power BI.`,
-      p2: `Certified in Big Data & Analytics by FIAP, I specialize in performance optimization
-      and workflow automation, transforming legacy processes into real-time pipelines.
-      By bridging technical engineering rigor with a strategic business mindset, I ensure
-      data follows the most efficient path from extraction to actionable insight.`,
+      p1: `Data Engineer focused on migrating legacy architectures to modern lakehouse environments. I build scalable ETL/ELT pipelines, manage SQL dialect compatibility, and enforce data governance with Azure, Databricks and Delta Lake.`,
+      p2: `I have experience modeling materialized tables in Delta Lake with Unity Catalog, managing secrets via Azure Key Vault, and delivering strategic reports in Power BI. My goal is to make data reliable, accessible and ready for faster, more accurate decisions.`,
     },
 
     experience: {
       title: "Professional Experience",
       items: [
         {
-          period: "2024 — 2025",
-          role: "Data Analyst | MIS",
-          company: "Winover Call Center",
+          period: "2026 — Present",
+          role: "Data Engineer | QSOFT",
+          company: "QSOFT",
           description: [
-            "Data Engineering: Development of ETL pipelines with Python integrating APIs and external providers.",
-            "Databases: Optimization of Stored Procedures and SQL Server data modeling.",
-            "Automation: Significant reduction in processing time using Python scripts.",
-            "Business Intelligence: Development of Power BI dashboards for strategic decision-making."
+            "Migrated ETL pipelines from ClickHouse (GAIO DataOS) to Databricks/PySpark using the Strangler Fig pattern.",
+            "Modeled and materialized data in Delta Lake with Unity Catalog and managed secrets through Azure Key Vault.",
+            "Resolved SQL dialect incompatibilities between Snowflake, T-SQL and ClickHouse in critical production queries.",
+            "Maintained and evolved Azure Data Lake Storage, Azure Blob Storage and Azure DevOps-based architecture."
           ],
-          tech: ["SQL", "Power BI", "Excel", "Python"]
+          tech: ["Databricks", "Azure", "Python", "SQL"]
         },
         {
-          period: "2023 — 2024",
-          role: "Operations and Backoffice Supervisor",
+          period: "2024 — 2025",
+          role: "Data Analyst",
           company: "Winover Call Center",
           description: [
-            "Supervised collections and sales teams for Santander.",
-            "Managed administrative teams and specialized service units."
+            "Developed and maintained Power BI dashboards to support operations and data intelligence.",
+            "Executed ETL processes on SQL Server and integrated complex datasets using advanced Excel.",
+            "Automated data collection, cleansing and alerts with Python, improving data quality.",
+            "Contributed to innovation projects with AI-driven solutions."
           ],
-          tech: ["Python", "SQL", "ETL", "Power BI"]
+          tech: ["Power BI", "SQL Server", "Python", "Excel"]
         }
       ]
     },
@@ -221,27 +212,27 @@ projects: {
 
     skills: {
       title: "Skills",
-      analyst: "Analytics & Intelligence",
-      engineer: "Data Engineering & Architecture",
+      analyst: "Business Intelligence & Reporting",
+      engineer: "Data Engineering & Cloud",
       analystSkills: [
-        "T-SQL (Complex Queries & Tuning)",
-        "Advanced Power BI (Modeling & DAX)",
-        "KPI Analysis & Performance Metrics",
-        "Data Storytelling & Strategic Dashboards",
-        "Exploratory Data Analysis (EDA)"
+        "Advanced Power BI (Modeling, DAX and interactive reports)",
+        "KPI analysis and operational performance",
+        "Data storytelling and strategic dashboards",
+        "Advanced Excel and automation",
+        "Data governance and information quality"
       ],
       engineerSkills: [
-        "Python (Pandas, Polars & Automation)",
-        "ETL / ELT Pipeline Architecture",
-        "Dimensional Modeling (Star Schema)",
-        "API Integration (REST) & Web Scraping",
-        "Data Wrangling & Scalable Processing"
+        "ETL / ELT pipeline architecture",
+        "Python (Pandas, Polars, PySpark)",
+        "Databricks, Azure Data Lake and Delta Lake",
+        "Dimensional modeling and SQL compatibility",
+        "Orchestration and automation of data workflows"
       ]
     },
 
     contact: {
-            title: "Contato",
-            description: "Vamos conversar? Me chama por qualquer um dos canais abaixo.",
+            title: "Contact",
+            description: "Let's talk? Reach me through any of the channels below.",
             email: {
                 value: "mhnfernandes123@gmail.com"
             },

@@ -24,7 +24,7 @@ export default function Navbar() {
 
         {/* Logo / Nome */}
         <a href="#hero" className="text-xl font-bold text-white">
-          Portfólio | Matheus Nóbrega
+          Matheus Nóbrega Fernandes
         </a>
 
         {/* Menu desktop */}
