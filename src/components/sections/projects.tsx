@@ -10,6 +10,7 @@ import { ArrowDown } from "lucide-react"
 type Dashboard = {
   name: string
   img: string
+  html?: string
 }
 
 export default function ProjectsSection() {
@@ -223,6 +224,9 @@ export default function ProjectsSection() {
                   <div className="relative h-44 w-full overflow-hidden rounded-lg">
                     <Image src={dash.img} alt={dash.name} fill className="object-cover" />
                   </div>
+                  {dash.html && (
+                    <p className="mt-3 text-xs text-slate-500">Clique para abrir preview interativo.</p>
+                  )}
                 </div>
               ))}
             </motion.div>
@@ -256,17 +260,37 @@ export default function ProjectsSection() {
               ✕
             </button>
             <div
-              className="relative h-[70vh] w-full overflow-hidden rounded-2xl border bg-black shadow-2xl"
+              className="relative h-[75vh] w-full overflow-hidden rounded-2xl border bg-black shadow-2xl"
               style={{ borderColor: "rgba(0,180,255,0.15)" }}
             >
-              <Image
-                src={selectedDashboard.img}
-                alt={selectedDashboard.name}
-                fill
-                className="object-contain"
-              />
+              {selectedDashboard.html ? (
+                <iframe
+                  src={selectedDashboard.html}
+                  title={selectedDashboard.name}
+                  className="h-full w-full bg-white"
+                />
+              ) : (
+                <Image
+                  src={selectedDashboard.img}
+                  alt={selectedDashboard.name}
+                  fill
+                  className="object-contain"
+                />
+              )}
             </div>
-            <p className="mt-3 text-center text-xs text-slate-500">{selectedDashboard.name}</p>
+            <div className="mt-4 flex flex-col items-center gap-2 text-center">
+              <p className="text-sm font-medium text-white">{selectedDashboard.name}</p>
+              {selectedDashboard.html && (
+                <a
+                  href={selectedDashboard.html}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-slate-300 underline-offset-2 hover:text-white"
+                >
+                  Abrir em nova aba para visualizar em tela cheia
+                </a>
+              )}
+            </div>
           </div>
         </div>
       )}

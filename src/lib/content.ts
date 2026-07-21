@@ -93,7 +93,7 @@ projects: {
                  • ROI operacional: reduzi horas de retrabalho na equipe de liderança.`
       },
       caseDashboards: {
-            title: "Resultados visuais e dashboards",
+            title: "Prints & visões estáticas",
             items: [
             { name: "Capa Executiva", img: "/dashboards/capa-v2.png" },
             { name: "KPIs de Disparos", img: "/dashboards/disparo-v2.png" },
@@ -102,11 +102,11 @@ projects: {
         },
 
         dashboards: {
-            title: "+ Dashboards - Power BI",
+            title: "+ Dashboards interativos",
             items: [
-            { name: "Dashboard | Custos TELECOM", img: "/dashboards/dashtelecom-v2.png" },
-            { name: "Dashboard | Agentes Digitais", img: "/dashboards/dashssinergy.png" },
-            { name: "Dashboard | Estudos & Aprimoramento", img: "/dashboards/dashtreino.png" }
+            { name: "Gaio · Unimed Nacional", img: "/dashboards/capa-v2.png", html: "/dashboards/gaio-unimed.html" },
+            { name: "Pesquisa de Saúde", img: "/dashboards/dashssinergy.png", html: "/dashboards/pesquisa-saude.html" },
+            { name: "Gaio DataOS", img: "/dashboards/dashtelecom-v2.png", html: "/dashboards/gaio-dataos.html" }
             ],
             backBtn: "Voltar"
         }
