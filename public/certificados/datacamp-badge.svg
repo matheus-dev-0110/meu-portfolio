@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="120" viewBox="0 0 360 120">
+  <rect width="360" height="120" rx="20" fill="#1f2937" />
+  <rect x="16" y="16" width="88" height="88" rx="18" fill="#2563eb" />
+  <text x="116" y="52" fill="#ffffff" font-family="Inter, Helvetica, Arial, sans-serif" font-size="20" font-weight="700">DataCamp</text>
+  <text x="116" y="80" fill="#cbd5e1" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14">Professional Data Engineer</text>
+  <text x="116" y="102" fill="#94a3b8" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12">Python · SQL · PySpark · Cloud</text>
+</svg>

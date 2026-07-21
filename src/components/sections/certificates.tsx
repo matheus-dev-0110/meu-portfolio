@@ -5,6 +5,11 @@ import Image from "next/image"
 
 const certificates = [
   {
+    title: "Professional Data Engineer - DataCamp",
+    file: "/certificados/certificado_datacamp.pdf",
+    img: "/certificados/datacamp-badge.svg",
+  },
+  {
     title: "Big Data & Analytics - FIAP",
     file: "/certificados/certificado_bigdata.pdf",
     img: "/certificados/Big Data & Analytics.png",

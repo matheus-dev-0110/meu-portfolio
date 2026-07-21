@@ -57,6 +57,7 @@ projects: {
       title: "Projetos de Destaques",
       featured: {
         title: "Migração de Arquitetura ETL (Strangler Fig)",
+        diagramImg: "/projects/strangler-fig-diagram.svg",
         challenge: "Arquitetura monolítica em ClickHouse unia ingestão, transformação e visualização em um mesmo fluxo, elevando a dependência de dialectos SQL específicos e o risco de alteração em produção.",
         solution: `Implementei a migração Strangler Fig para isolar cargas de trabalho e reduzir risco técnico:
                   • Antes: GAIO DataOS (ClickHouse) executava ingestão + transformação + visualização em única camada.
@@ -80,6 +81,7 @@ projects: {
       },
       secondary: {
         title: "Transformação Digital Operacional",
+        diagramImg: "/projects/operational-transformation.svg",
         challenge: "A tomada de decisão era refém de processos manuais e planilhas descentralizadas. A equipe perdia as primeiras 4 horas do dia apenas minerando dados de APIs, sites e servidores SFTP.",
         solution: `Projetei uma infraestrutura de dados escalável e resiliente:
                   • Orquestração Inteligente: Implementei Prefect para gerenciar o fluxo de dados de ponta a ponta.
@@ -200,16 +202,28 @@ projects: {
 projects: {
       title: "Projects & Case Studies",
       featured: {
-        title: "From Chaos to Real-Time: Driving Operational Transformation",
-        challenge: "Decision-making was hindered by manual processes and siloed spreadsheets. The team spent the first 4 hours of every day mining data from various APIs and SFTP servers. This resulted in a 24-hour data latency and a high risk of human error that compromised KPI reliability.",
-        solution: `To break this bottleneck, I designed a scalable and resilient data infrastructure:
-                  • Intelligent Orchestration: Implemented Prefect to manage end-to-end data flows, ensuring that API or SFTP failures were handled automatically without downtime.
-                  • Processing Engine: Developed a transformation engine in Python. Leveraged Polars to ensure high-performance processing of large datasets, performing Data Wrangling and normalization of raw data.
-                  • High-Performance Warehouse: Built the Data Warehouse in SQL Server using Star Schema architecture, utilizing Stored Procedures to optimize heavy metric calculations directly on the server side.
-                  • Visual Intelligence: Developed advanced Power BI dashboards, using complex DAX to create real-time operational and predictive views.`,
-        impact: `• Efficiency Boost: Automation eliminated manual tasks, leading to a 20% increase in digital operation output.
-                 • Data-Driven Confidence: Reduced data latency from 24 hours to Real-Time, enabling immediate strategic adjustments.
-                 • Operational ROI: Eliminating manual errors saved the leadership team dozens of hours per month in rework.`
+        title: "ETL Architecture Migration (Strangler Fig)",
+        diagramImg: "/projects/strangler-fig-diagram.svg",
+        challenge: "A monolithic ClickHouse architecture combined ingestion, transformation, and visualization in a single layer, increasing dependency on specific SQL dialects and production risk.",
+        solution: `I implemented the Strangler Fig migration to decouple workloads and reduce technical risk:
+                  • Before: GAIO DataOS (ClickHouse) ran ingestion + transformation + visualization as one stack.
+                  • After: Databricks/PySpark takes ETL and transformation, while Delta Lake handles materialized storage.
+                  • Governance: Unity Catalog organizes metadata, Azure Key Vault centralizes secrets and ADLS stores raw and processed assets.
+                  • SQL compatibility: I harmonized queries across ClickHouse, Snowflake and T-SQL to keep production online during the gradual cutover.`,
+        before: [
+          "GAIO DataOS (ClickHouse) with ingestion, transformation and visualization together.",
+          "Specific SQL dialect dependency and monolithic architecture.",
+          "Slow deploys and high risk for production pipeline changes."
+        ],
+        after: [
+          "Databricks/PySpark handling ETL and transformation.",
+          "Delta Lake materializing tables with Unity Catalog.",
+          "GAIO remains only as a consumption/visualization layer.",
+          "Azure Key Vault centralizes credentials and lowers exposure."
+        ],
+        impact: `• Risk reduction: gradual cutover kept reports running while modernizing the pipeline.
+                 • Strong governance: Unity Catalog and ADLS improved data visibility.
+                 • Faster operations: decoupling the pipeline accelerated data delivery and simplified support.`
       },
       caseDashboards: {
             title: "Dashboards gerados a partir deste projeto",

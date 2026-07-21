@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540">
+  <rect width="900" height="540" rx="32" fill="#0b1220" />
+  <text x="60" y="60" fill="#c084fc" font-family="Inter, sans-serif" font-size="32" font-weight="700">Antes</text>
+  <rect x="60" y="100" width="360" height="340" rx="24" fill="#111827" stroke="#4f46e5" stroke-width="4" />
+  <text x="90" y="150" fill="#f8fafc" font-family="Inter, sans-serif" font-size="20" font-weight="600">GAIO DataOS</text>
+  <text x="90" y="190" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">ClickHouse monolítico</text>
+  <text x="90" y="220" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">Ingestão + Transformação + Visualização</text>
+  <text x="90" y="250" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">Dependência de dialetos SQL</text>
+
+  <text x="480" y="60" fill="#22c55e" font-family="Inter, sans-serif" font-size="32" font-weight="700">Depois</text>
+  <rect x="480" y="100" width="360" height="340" rx="24" fill="#111827" stroke="#16a34a" stroke-width="4" />
+  <text x="510" y="150" fill="#f8fafc" font-family="Inter, sans-serif" font-size="20" font-weight="600">Databricks + Delta Lake</text>
+  <text x="510" y="190" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">PySpark ETL e materialização</text>
+  <text x="510" y="220" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">Unity Catalog + ADLS</text>
+  <text x="510" y="250" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="16">Azure Key Vault e governança</text>
+</svg>

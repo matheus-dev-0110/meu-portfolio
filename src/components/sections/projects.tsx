@@ -20,6 +20,8 @@ export default function ProjectsSection() {
   const [selectedDashboard, setSelectedDashboard] =
     useState<Dashboard | null>(null)
 
+  const featuredImage = t.featured.diagramImg ?? "/projects/pipeline-architecture.png"
+
   return (
     <section id="projects" className="py-32 bg-[#0B0E14]">
       <div className="mx-auto max-w-6xl px-6">
@@ -55,6 +57,26 @@ export default function ProjectsSection() {
                   {t.featured.solution}
                 </p>
 
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <h4 className="mb-3 text-sm font-semibold text-white">Antes</h4>
+                    <ul className="space-y-2 text-sm text-slate-300">
+                      {t.featured.before.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <h4 className="mb-3 text-sm font-semibold text-white">Depois</h4>
+                    <ul className="space-y-2 text-sm text-slate-300">
+                      {t.featured.after.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
                 <p className="whitespace-pre-line">
                   <strong className="text-white">Impacto:</strong><br />
                   {t.featured.impact}
@@ -65,7 +87,7 @@ export default function ProjectsSection() {
             {/* IMAGEM DO PROJETO */}
             <div className="relative">
               <Image
-                src="/projects/pipeline-architecture.png"
+                src={featuredImage}
                 alt="Arquitetura do pipeline"
                 width={900}
                 height={700}
@@ -79,11 +101,56 @@ export default function ProjectsSection() {
           </div>
         </motion.div>
 
+        {/* ================= SEGUNDO PROJETO ================= */}
+        {t.secondary && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 rounded-2xl border border-white/10 bg-black/40 p-8 backdrop-blur-xl shadow-lg"
+          >
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
+              <div>
+                <h3 className="mb-4 text-2xl font-semibold text-white">
+                  {t.secondary.title}
+                </h3>
+
+                <div className="space-y-6 text-white/70 leading-relaxed">
+                  <p>
+                    <strong className="text-white">{language === "pt" ? "Desafio:" : "Challenge:"}</strong><br />
+                    {t.secondary.challenge}
+                  </p>
+
+                  <p className="whitespace-pre-line">
+                    <strong className="text-white">{language === "pt" ? "Solução Técnica:" : "Solution:"}</strong><br />
+                    {t.secondary.solution}
+                  </p>
+
+                  <p className="whitespace-pre-line">
+                    <strong className="text-white">{language === "pt" ? "Impacto:" : "Impact:"}</strong><br />
+                    {t.secondary.impact}
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <Image
+                  src={t.secondary.diagramImg}
+                  alt={t.secondary.title}
+                  width={900}
+                  height={700}
+                  className="rounded-2xl border border-white/10 shadow-xl bg-black"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* ================= SETA / HIERARQUIA ================= */}
         <div className="my-14 flex flex-col items-center text-purple-400">
           <ArrowDown size={36} />
           <span className="mt-2 text-sm uppercase tracking-wide opacity-80">
-            Dashboards gerados a partir deste projeto
+            {t.caseDashboards.title}
           </span>
         </div>
 
