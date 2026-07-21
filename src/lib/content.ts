@@ -225,6 +225,19 @@ projects: {
                  • Strong governance: Unity Catalog and ADLS improved data visibility.
                  • Faster operations: decoupling the pipeline accelerated data delivery and simplified support.`
       },
+      secondary: {
+        title: "Operational Data Transformation",
+        diagramImg: "/projects/operational-transformation.svg",
+        challenge: "Decision-making was delayed by manual processes and siloed spreadsheets. The team spent the first 4 hours each day mining data from APIs, sites and SFTP servers.",
+        solution: `To break this bottleneck, I designed a scalable and resilient data infrastructure:
+                  • Intelligent Orchestration: Implemented Prefect to manage end-to-end data flows.
+                  • Processing Engine: Built Python transformations with Polars for performance and normalization.
+                  • High-Performance Warehouse: Structured the data warehouse in SQL Server using Star Schema.
+                  • Visual Intelligence: Created Power BI dashboards with advanced DAX for real-time operational views.`,
+        impact: `• Efficiency boost: automation eliminated manual work and increased digital output.
+                 • Data confidence: reduced latency from 24h to faster, more reliable reporting.
+                 • Operational ROI: decreased leadership rework by saving dozens of hours per month.`
+      },
       caseDashboards: {
             title: "Dashboards gerados a partir deste projeto",
             items: [
