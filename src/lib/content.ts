@@ -28,7 +28,7 @@ export const content = {
       items: [
         {
           period: "2026 — Atual",
-          role: "Engenheiro de Dados",
+          role: "Engenheiro de Dados Pleno III",
           company: "QSOFT",
           description: [
             "Migração de pipelines ETL de ClickHouse (GAIO DataOS) para Databricks/PySpark usando o padrão Strangler Fig.",
@@ -174,7 +174,7 @@ projects: {
       items: [
         {
           period: "2026 — Present",
-          role: "Data Engineer | QSOFT",
+          role: "Data Engineer III | QSOFT",
           company: "QSOFT",
           description: [
             "Migrated ETL pipelines from ClickHouse (GAIO DataOS) to Databricks/PySpark using the Strangler Fig pattern.",
