@@ -9,7 +9,7 @@ import { ArrowDown } from "lucide-react"
 
 type Dashboard = {
   name: string
-  img: string
+  img?: string
   html?: string
 }
 
@@ -188,9 +188,20 @@ export default function ProjectsSection() {
               className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
             >
               <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
-              <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                <Image src={dash.img} alt={dash.name} fill className="object-cover" />
-              </div>
+              {dash.html ? (
+                <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
+                  <iframe
+                    src={dash.html}
+                    title={dash.name}
+                    className="pointer-events-none h-full w-full"
+                    style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
+                  />
+                </div>
+              ) : (
+                <div className="relative h-44 w-full overflow-hidden rounded-lg">
+                  <Image src={dash.img ?? "/projects/pipeline-architecture.png"} alt={dash.name} fill className="object-cover" />
+                </div>
+              )}
             </div>
           ))}
         </motion.div>
@@ -221,9 +232,20 @@ export default function ProjectsSection() {
                   className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
                 >
                   <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
-                  <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                    <Image src={dash.img} alt={dash.name} fill className="object-cover" />
-                  </div>
+                  {dash.html ? (
+                    <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
+                      <iframe
+                        src={dash.html}
+                        title={dash.name}
+                        className="pointer-events-none h-full w-full"
+                        style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative h-44 w-full overflow-hidden rounded-lg">
+                      <Image src={dash.img ?? "/projects/pipeline-architecture.png"} alt={dash.name} fill className="object-cover" />
+                    </div>
+                  )}
                   {'html' in dash && dash.html && (
                     <p className="mt-3 text-xs text-slate-500">Clique para abrir preview interativo.</p>
                   )}

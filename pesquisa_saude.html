@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Pesquisa de Saúde</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- =====================================================================
+     TOKENS & RESET
+====================================================================== -->
+<style>
+  :root {
+    --green-50:  #ecf7f0;
+    --green-100: #d6efde;
+    --green-200: #aadfbf;
+    --green-300: #74cb9c;
+    --green-400: #2fae74;
+    --green-500: #00995d;
+    --green-600: #008551;
+    --green-700: #006e43;
+    --green-800: #015336;
+    --green-900: #0a3a26;
+
+    --lime:      #8cc152;
+    --lime-soft: #b7dd8e;
+    --amber:     #e8833a;
+    --amber-soft:#f3b483;
+
+    --bg:        #faf8f4;
+    --surface:   #ffffff;
+    --line:      #ecebe5;
+    --line-2:    #e3e1d8;
+
+    --ink-900:   #1a1f1c;
+    --ink-700:   #3a423d;
+    --ink-500:   #6b716c;
+    --ink-400:   #8a8f8a;
+    --ink-300:   #b6b9b3;
+
+    --chip-bg:   #f1efe8;
+
+    --radius:    14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 1px 0 rgba(15,30,20,0.04);
+    --shadow:    0 1px 2px rgba(15,30,20,0.05), 0 8px 24px -16px rgba(15,30,20,0.08);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink-900);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+</style>
+
+<!-- =====================================================================
+     LAYOUT
+====================================================================== -->
+<style>
+  .app { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+</style>
+
+<!-- =====================================================================
+     SIDEBAR
+====================================================================== -->
+<style>
+  .sidebar {
+    background: var(--bg);
+    border-right: 1px solid var(--line);
+    padding: 20px 16px;
+    display: flex; flex-direction: column;
+    gap: 24px;
+    position: sticky; top: 0; height: 100vh;
+  }
+
+  .brand { display: flex; align-items: center; gap: 12px; padding: 8px 8px; }
+  .brand-logo {
+    width: 40px; height: 40px;
+    background: var(--green-500);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    box-shadow: 0 2px 6px rgba(0,153,93,0.25);
+  }
+  .brand-name { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+
+  .nav-section-label {
+    font-size: 11px; color: var(--ink-400);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0 12px 8px; font-weight: 600;
+  }
+  .nav-list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 12px; border-radius: 8px;
+    color: var(--ink-700); font-weight: 500;
+    cursor: pointer; user-select: none;
+    border: 1px solid transparent; transition: background 120ms;
+  }
+  .nav-item:hover { background: var(--green-50); }
+  .nav-item.active {
+    background: var(--surface);
+    border-color: var(--line-2);
+    color: var(--ink-900);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-item svg { color: var(--ink-500); }
+  .nav-item.active svg { color: var(--green-600); }
+
+  .sidebar-footer {
+    margin-top: auto;
+    border: 1px dashed var(--line-2);
+    border-radius: 10px; padding: 12px;
+    text-align: center; color: var(--ink-400);
+    font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+
+<!-- =====================================================================
+     MAIN / CONTENT AREA
+====================================================================== -->
+<style>
+  .main {
+    background: var(--surface);
+    margin: 8px 8px 8px 0;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* decorative sparkles overlay */
+  .sparkles {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 260px;
+    pointer-events: none;
+    opacity: 0.55;
+    background-image:
+      radial-gradient(circle at 12% 18%, var(--green-300) 0 1.2px, transparent 1.6px),
+      radial-gradient(circle at 28% 70%, var(--green-200) 0 1px,   transparent 1.4px),
+      radial-gradient(circle at 47% 22%, var(--green-300) 0 1.3px, transparent 1.8px),
+      radial-gradient(circle at 65% 60%, var(--green-200) 0 0.9px, transparent 1.3px),
+      radial-gradient(circle at 82% 28%, var(--green-300) 0 1.1px, transparent 1.5px),
+      radial-gradient(circle at 95% 75%, var(--green-200) 0 1px,   transparent 1.4px),
+      radial-gradient(circle at  8% 88%, var(--green-300) 0 1.1px, transparent 1.5px),
+      radial-gradient(circle at 38% 42%, var(--green-200) 0 0.9px, transparent 1.3px),
+      radial-gradient(circle at 55% 88%, var(--green-300) 0 1px,   transparent 1.4px),
+      radial-gradient(circle at 72% 12%, var(--green-200) 0 1.1px, transparent 1.5px),
+      radial-gradient(circle at 88% 50%, var(--green-300) 0 1px,   transparent 1.4px),
+      radial-gradient(circle at 20% 38%, var(--green-200) 0 0.9px, transparent 1.3px);
+  }
+  .sparkles::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, var(--surface));
+  }
+
+  .content { position: relative; padding: 28px 32px 48px; }
+</style>
+
+<!-- =====================================================================
+     BREADCRUMB & PAGE HEADER
+====================================================================== -->
+<style>
+  .breadcrumb {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: 0.18em;
+    color: var(--ink-400); text-transform: uppercase;
+    font-weight: 600;
+  }
+  .breadcrumb .sep { color: var(--ink-300); }
+  .breadcrumb .current { color: var(--ink-900); }
+
+  .page-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 24px; margin-top: 14px;
+  }
+  .page-title {
+    font-size: 40px; line-height: 1.1; font-weight: 800;
+    letter-spacing: -0.02em; margin: 0;
+    position: relative; display: inline-block;
+  }
+  .page-title::after {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px; background: var(--green-500);
+    border-radius: 2px;
+  }
+  .page-subtitle { margin: 18px 0 0; color: var(--ink-500); font-size: 14px; }
+
+  .header-actions { display: flex; align-items: center; gap: 8px; margin-top: 24px; flex-shrink: 0; }
+</style>
+
+<!-- =====================================================================
+     TAB GROUP
+====================================================================== -->
+<style>
+  .tab-group { display: inline-flex; background: var(--chip-bg); border-radius: 999px; padding: 4px; gap: 2px; }
+  .tab {
+    padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    color: var(--ink-500); cursor: pointer; border: none; background: transparent; font-family: inherit;
+    transition: background 120ms, color 120ms;
+  }
+  .tab.active { background: var(--surface); color: var(--green-700); box-shadow: var(--shadow-sm); }
+</style>
+
+<!-- =====================================================================
+     BUTTONS
+====================================================================== -->
+<style>
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; font-family: inherit;
+    transition: background 120ms, border-color 120ms;
+  }
+  .btn-primary { background: var(--green-600); color: white; }
+  .btn-primary:hover { background: var(--green-700); }
+  .btn-ghost { background: transparent; color: var(--ink-700); border-color: var(--line-2); }
+  .btn-ghost:hover { background: var(--bg); }
+</style>
+
+<!-- =====================================================================
+     CARDS
+====================================================================== -->
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .card-title { font-weight: 600; font-size: 14px; color: var(--ink-900); }
+  .card-icons { display: flex; gap: 10px; color: var(--ink-400); align-items: center; }
+  .card-icons svg { cursor: pointer; }
+  .card-icons svg:hover { color: var(--ink-700); }
+
+  /* accent top-border variant */
+  .accent-card { position: relative; }
+  .accent-card::before {
+    content: ""; position: absolute;
+    top: -1px; left: 18px;
+    width: 36px; height: 4px;
+    background: var(--green-500);
+    border-radius: 0 0 4px 4px;
+  }
+</style>
+
+<!-- =====================================================================
+     SECTION LABEL
+====================================================================== -->
+<style>
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 700; color: var(--green-700);
+    letter-spacing: 0.02em; margin: 30px 0 12px;
+  }
+  .section-label::before {
+    content: ""; width: 4px; height: 16px;
+    background: var(--green-500); border-radius: 2px;
+  }
+</style>
+
+<!-- =====================================================================
+     FILTERS
+====================================================================== -->
+<style>
+  .filters { margin-top: 28px; padding: 22px; }
+  .filters-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px 18px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field-label {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-500); font-weight: 600;
+  }
+
+  .input,
+  .select {
+    width: 100%; padding: 9px 12px;
+    border: 1px solid var(--line-2); border-radius: var(--radius-sm);
+    font-size: 13.5px; font-family: inherit; color: var(--ink-900);
+    background: var(--surface); outline: none;
+    transition: border-color 120ms, box-shadow 120ms;
+  }
+  .input:focus,
+  .select:focus { border-color: var(--green-500); box-shadow: 0 0 0 3px var(--green-100); }
+
+  .input-with-icon { position: relative; }
+  .input-with-icon .input {
+    padding-left: 34px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  }
+  .input-with-icon .ico {
+    position: absolute; left: 10px; top: 50%;
+    transform: translateY(-50%); color: var(--ink-400);
+  }
+
+  .select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b716c' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 32px; color: var(--ink-700);
+  }
+
+  .filters-foot {
+    display: flex; justify-content: flex-end; gap: 10px;
+    margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line-2);
+  }
+</style>
+
+<!-- =====================================================================
+     ADMIN BANNER
+====================================================================== -->
+<style>
+  .admin-banner {
+    margin-top: 28px;
+    background: linear-gradient(100deg, var(--green-800), var(--green-700));
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    display: flex; align-items: center; gap: 16px;
+    color: #fff; box-shadow: 0 10px 30px -18px rgba(0,110,67,0.7);
+  }
+  .admin-banner .ab-ico {
+    width: 42px; height: 42px; border-radius: 11px;
+    background: rgba(255,255,255,0.14); display: grid; place-items: center;
+  }
+  .admin-banner .ab-title  { font-weight: 800; font-size: 20px; letter-spacing: -0.01em; white-space: nowrap; }
+  .admin-banner .ab-sub    { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.82; margin-top: 2px; }
+  .admin-banner .ab-meta   { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.85; text-align: right; }
+</style>
+
+<!-- =====================================================================
+     KPI CARDS
+====================================================================== -->
+<style>
+  .kpi-grid { margin-top: 16px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .kpi-card { position: relative; padding: 20px 22px; overflow: hidden; }
+  .kpi-card .k-top  { display: flex; align-items: flex-start; justify-content: space-between; }
+  .kpi-card .k-lbl  { font-size: 12.5px; color: var(--ink-500); font-weight: 600; max-width: 64%; }
+  .kpi-card .k-ico  {
+    width: 40px; height: 40px; border-radius: 11px;
+    background: var(--green-50); display: grid; place-items: center;
+    color: var(--green-600); flex-shrink: 0;
+  }
+  .kpi-card .k-ico.lime  { background: #f0f6e8; color: var(--lime); }
+  .kpi-card .k-ico.amber { background: #fbeee2; color: var(--amber); }
+  .kpi-card .k-val  { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin: 16px 0 0; }
+  .kpi-card .k-val .unit { font-size: 17px; font-weight: 700; color: var(--ink-400); margin-left: 4px; }
+  .kpi-card .k-foot {
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--ink-500);
+  }
+  .kpi-card .k-foot strong { color: var(--ink-900); font-family: 'JetBrains Mono', monospace; }
+
+  .k-bar { height: 5px; border-radius: 3px; background: var(--green-100); overflow: hidden; margin-top: 14px; }
+  .k-bar > span { display: block; height: 100%; background: var(--green-500); border-radius: 3px; }
+</style>
+
+<!-- =====================================================================
+     GRID ROWS
+====================================================================== -->
+<style>
+  .row { margin-top: 16px; display: grid; gap: 16px; }
+  .row-1-1-1 { grid-template-columns: 1.3fr 1fr 1fr; }
+  .row-1-1   { grid-template-columns: 1fr 1fr; }
+  .row-3     { grid-template-columns: repeat(3, 1fr); }
+</style>
+
+<!-- =====================================================================
+     CHARTS
+====================================================================== -->
+<style>
+  .chart-body { padding: 16px 16px 18px; }
+  .chart-svg  { width: 100%; display: block; }
+  .chart-svg text { font-family: 'Inter', sans-serif; }
+
+  .legend { display: flex; gap: 16px; justify-content: center; padding: 12px 18px 2px; flex-wrap: wrap; }
+  .legend.end { justify-content: flex-end; }
+  .legend .lg  { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-500); }
+  .legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  .donut-center { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+</style>
+
+<!-- =====================================================================
+     MISC HELPERS
+====================================================================== -->
+<style>
+  .info-i {
+    display: inline-grid; place-items: center;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.2px solid var(--ink-300); color: var(--ink-400);
+    font-size: 10px; font-weight: 700; font-family: serif;
+  }
+  .grid-i svg { color: var(--ink-400); }
+</style>
+
+<!-- =====================================================================
+     RESPONSIVE
+====================================================================== -->
+<style>
+  @media (max-width: 1180px) {
+    .filters-grid { grid-template-columns: repeat(3, 1fr); }
+    .kpi-grid     { grid-template-columns: repeat(2, 1fr); }
+    .row-1-1-1,
+    .row-3        { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .app     { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main    { margin: 0; border-radius: 0; }
+  }
+</style>
+
+</head>
+<body>
+  <div class="app">
+
+    <!-- ================================================================
+         SIDEBAR
+    ================================================================= -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h10M4 18h16" stroke="white" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-name">Plataforma Analytics</div>
+      </div>
+
+      <nav>
+        <div class="nav-section-label">Pesquisas</div>
+        <div class="nav-list">
+          <div class="nav-item active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>
+            </svg>
+            Pesquisa de Saúde
+          </div>
+          <div class="nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="7" r="3.2"/>
+              <path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/>
+              <circle cx="17" cy="9" r="2.4"/>
+            </svg>
+            Perfil do Respondente
+          </div>
+          <div class="nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"/>
+              <path d="M7 14l3-3 3 3 5-6"/>
+            </svg>
+            Engajamento
+          </div>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="nav-section-label">Monitoramento</div>
+        <div class="nav-list">
+          <div class="nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="3.2"/>
+              <path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
+            </svg>
+            Célula
+          </div>
+          <div class="nav-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3"  y="3"  width="7" height="7" rx="1.2"/>
+              <rect x="14" y="3"  width="7" height="7" rx="1.2"/>
+              <rect x="3"  y="14" width="7" height="7" rx="1.2"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.2"/>
+            </svg>
+            Overview
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">v2.0 · Analytics OS</div>
+    </aside>
+
+    <!-- ================================================================
+         MAIN
+    ================================================================= -->
+    <main class="main">
+      <div class="sparkles"></div>
+      <div class="content">
+
+        <!-- breadcrumb -->
+        <div class="breadcrumb">
+          <span>Portal</span>
+          <svg class="sep" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Pesquisas</span>
+          <svg class="sep" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="current">Pesquisa de Saúde</span>
+        </div>
+
+        <!-- page header -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Pesquisa de Saúde</h1>
+            <p class="page-subtitle">Perfil e engajamento dos respondentes · período mai/2025 a mai/2026</p>
+          </div>
+          <div class="header-actions">
+            <div class="tab-group">
+              <button class="tab active">Visão Administrativa</button>
+              <button class="tab">Perfil</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTROS -->
+        <section class="card accent-card filters">
+          <div class="filters-grid">
+            <div class="field">
+              <label class="field-label">Grupo Empresa</label>
+              <select class="select"><option>Selecione a empresa</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Tipo Produto</label>
+              <select class="select"><option>Todos</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">UF</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Ano Resposta</label>
+              <select class="select"><option>Selecione</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Início Período Resposta</label>
+              <div class="input-with-icon">
+                <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <rect x="3" y="5" width="18" height="16" rx="2"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <line x1="8" y1="3"  x2="8"  y2="7"/>
+                  <line x1="16" y1="3" x2="16" y2="7"/>
+                </svg>
+                <input class="input" value="2025-05-01" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label">Tipo de Beneficiário</label>
+              <select class="select"><option>Todos</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Faixa Etária</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Sexo Biológico</label>
+              <select class="select"><option>Selecione</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">PCD</label>
+              <select class="select"><option>Todos</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Fim Período Resposta</label>
+              <div class="input-with-icon">
+                <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <rect x="3" y="5" width="18" height="16" rx="2"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <line x1="8" y1="3"  x2="8"  y2="7"/>
+                  <line x1="16" y1="3" x2="16" y2="7"/>
+                </svg>
+                <input class="input" value="2026-05-31" />
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label">Lotação</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Raça / Etnia</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Orientação Sexual</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+            <div class="field">
+              <label class="field-label">Identidade de Gênero</label>
+              <select class="select"><option>Todas</option></select>
+            </div>
+          </div>
+          <div class="filters-foot">
+            <button class="btn btn-ghost">Resetar</button>
+            <button class="btn btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Aplicar
+            </button>
+          </div>
+        </section>
+
+        <!-- VISÃO ADMINISTRATIVA BANNER -->
+        <div class="admin-banner">
+          <div class="ab-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"/>
+              <path d="M7 14l3-3 3 3 5-6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="ab-sub">Pesquisa de Saúde</div>
+            <div class="ab-title">Visão Administrativa</div>
+          </div>
+          <div class="ab-meta">última sincronização<br>2026-05-31 11:41</div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid">
+          <div class="card kpi-card">
+            <div class="k-top">
+              <span class="k-lbl">Respondentes</span>
+              <span class="k-ico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="8" r="3"/>
+                  <circle cx="17" cy="9" r="2.4"/>
+                  <path d="M3 20a6 6 0 0 1 12 0"/>
+                </svg>
+              </span>
+            </div>
+            <div class="k-val">609</div>
+            <div class="k-foot"><span>total de participantes</span><strong>100%</strong></div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="k-top">
+              <span class="k-lbl">Completaram</span>
+              <span class="k-ico">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+            </div>
+            <div class="k-val">504</div>
+            <div class="k-bar"><span style="width:82.8%"></span></div>
+            <div class="k-foot"><span>concluíram a pesquisa</span><strong>82,76%</strong></div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="k-top">
+              <span class="k-lbl">Aderência</span>
+              <span class="k-ico lime">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </span>
+            </div>
+            <div class="k-val">0,03<span class="unit">%</span></div>
+            <div class="k-foot"><span>respondentes / base elegível</span><strong>132.984</strong></div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="k-top">
+              <span class="k-lbl">Resp. por Empresa</span>
+              <span class="k-ico amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 21h18"/>
+                  <path d="M5 21V7l7-4 7 4v14"/>
+                  <path d="M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/>
+                </svg>
+              </span>
+            </div>
+            <div class="k-val">132.984</div>
+            <div class="k-foot"><span>base elegível total</span><strong>vidas</strong></div>
+          </div>
+        </div>
+
+        <!-- PERFIL DO RESPONDENTE -->
+        <div class="section-label">Perfil do Respondente</div>
+        <div class="row row-1-1-1">
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Tipo Beneficiário × Sexo Biológico</div>
+              <div class="card-icons grid-i">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="3" y1="15" x2="21" y2="15"/>
+                  <line x1="9" y1="3" x2="9" y2="21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="legend" id="leg-stacked"></div>
+            <div class="chart-body">
+              <svg class="chart-svg" id="bar-stacked" viewBox="0 0 460 280" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Sexo Biológico</div>
+              <div class="card-icons"><span class="info-i">i</span></div>
+            </div>
+            <div class="legend" id="leg-sexo"></div>
+            <div class="chart-body donut-center">
+              <svg class="chart-svg" id="donut-sexo" viewBox="0 0 280 250" preserveAspectRatio="xMidYMid meet" style="max-width:320px;"></svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Tipo Beneficiário</div>
+              <div class="card-icons grid-i">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="3" y1="15" x2="21" y2="15"/>
+                  <line x1="9" y1="3" x2="9" y2="21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="legend" id="leg-tipo"></div>
+            <div class="chart-body donut-center">
+              <svg class="chart-svg" id="donut-tipo" viewBox="0 0 280 250" preserveAspectRatio="xMidYMid meet" style="max-width:320px;"></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENGAJAMENTO E DEMOGRAFIA -->
+        <div class="section-label">Engajamento e Demografia</div>
+        <div class="row row-3">
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Respondentes por Ano</div>
+              <div class="card-icons"><span class="info-i">i</span></div>
+            </div>
+            <div class="chart-body">
+              <svg class="chart-svg" id="bar-ano" viewBox="0 0 460 300" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Respondentes por Mês</div>
+              <div class="card-icons"><span class="info-i">i</span></div>
+            </div>
+            <div class="chart-body">
+              <svg class="chart-svg" id="bar-mes" viewBox="0 0 460 300" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Faixa Etária</div>
+              <div class="card-icons grid-i">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="3" y1="15" x2="21" y2="15"/>
+                  <line x1="9" y1="3" x2="9" y2="21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="chart-body">
+              <svg class="chart-svg" id="bar-faixa" viewBox="0 0 460 300" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.content -->
+    </main>
+
+  </div><!-- /.app -->
+
+<!-- =====================================================================
+     SCRIPTS — render de gráficos
+====================================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  var GREEN   = '#00995d';
+  var GREEN_D = '#006e43';
+  var LIME    = '#8cc152';
+  var AMBER   = '#e8833a';
+  var INK     = '#1a1f1c';
+  var INK_M   = '#6b716c';
+  var INK_L   = '#8a8f8a';
+  var GRID    = '#ecebe5';
+
+  function el(id) { return document.getElementById(id); }
+
+  /* ---- legend ---- */
+  function legend(node, items) {
+    el(node).innerHTML = items.map(function (it) {
+      return '<span class="lg"><span class="dot" style="background:' + it.color + '"></span>' + it.label + '</span>';
+    }).join('');
+  }
+
+  /* ---- donut com centro + labels externos ---- */
+  function donut(svgId, segs, centerVal, labels) {
+    var cx = 140, cy = 118, r = 80, sw = 28, C = 2 * Math.PI * r;
+    var total = segs.reduce(function (a, b) { return a + b.v; }, 0);
+    var s = '<g transform="rotate(-90 ' + cx + ' ' + cy + ')">';
+    var acc = 0;
+    segs.forEach(function (sg) {
+      var frac = sg.v / total, dash = frac * C, gap = 1.2;
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + sg.color
+         + '" stroke-width="' + sw
+         + '" stroke-dasharray="' + Math.max(dash - gap, 0) + ' ' + (C - dash + gap)
+         + '" stroke-dashoffset="' + (-acc * C) + '"/>';
+      acc += frac;
+    });
+    s += '</g>';
+    s += '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" font-size="13" fill="' + INK_L + '">Total</text>';
+    s += '<text x="' + cx + '" y="' + (cy + 22) + '" text-anchor="middle" font-size="26" font-weight="800" fill="' + INK + '">' + centerVal + '</text>';
+    (labels || []).forEach(function (lb) {
+      s += '<text x="' + lb.x + '" y="' + lb.y + '" text-anchor="' + (lb.anchor || 'middle') + '" font-size="12.5" font-weight="700" fill="' + INK + '">' + lb.name + '</text>';
+      s += '<text x="' + lb.x + '" y="' + (lb.y + 16) + '" text-anchor="' + (lb.anchor || 'middle') + '" font-size="12" fill="' + INK_M + '">' + lb.detail + '</text>';
+    });
+    el(svgId).innerHTML = s;
+  }
+
+  /* ---- barras verticais empilhadas ---- */
+  function stackedBars(svgId, cats, series) {
+    var W = 460, H = 280, padL = 44, padR = 16, padT = 28, padB = 40;
+    var innerW = W - padL - padR, innerH = H - padT - padB;
+    var totals = cats.map(function (c) {
+      return series.reduce(function (a, sObj) { return a + (sObj.data[c.key] || 0); }, 0);
+    });
+    var max = Math.max.apply(null, totals) * 1.16;
+    var gap = innerW / cats.length, bw = Math.min(gap * 0.5, 90);
+    var s = '';
+    for (var t = 0; t <= 4; t++) {
+      var gv = max * t / 4, gy = padT + innerH - (gv / max) * innerH;
+      s += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + gy + '" y2="' + gy
+         + '" stroke="' + GRID + '" stroke-dasharray="' + (t === 0 ? '0' : '2 4') + '"/>';
+      s += '<text x="' + (padL - 8) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="10.5" fill="' + INK_L + '">' + Math.round(gv) + '</text>';
+    }
+    cats.forEach(function (c, i) {
+      var x = padL + i * gap + (gap - bw) / 2;
+      var yCursor = padT + innerH;
+      series.forEach(function (sObj) {
+        var v = sObj.data[c.key] || 0;
+        if (!v) return;
+        var h = (v / max) * innerH;
+        yCursor -= h;
+        s += '<rect x="' + x + '" y="' + yCursor + '" width="' + bw + '" height="' + h + '" fill="' + sObj.color + '"/>';
+        if (h > 22) {
+          s += '<text x="' + (x + bw / 2) + '" y="' + (yCursor + h / 2 + 4)
+              + '" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">' + v + '</text>';
+        }
+      });
+      var totH = (totals[i] / max) * innerH;
+      s += '<text x="' + (x + bw / 2) + '" y="' + (padT + innerH - totH - 8) + '" text-anchor="middle" font-size="12" font-weight="700" fill="' + INK + '">' + totals[i] + '</text>';
+      s += '<text x="' + (x + bw / 2) + '" y="' + (H - 14) + '" text-anchor="middle" font-size="12" fill="' + INK_M + '" font-weight="500">' + c.label + '</text>';
+    });
+    el(svgId).innerHTML = s;
+  }
+
+  /* ---- barras simples com valor + % ---- */
+  function vBars(svgId, data, color) {
+    var W = 460, H = 300, padL = 40, padR = 16, padT = 40, padB = 42;
+    var innerW = W - padL - padR, innerH = H - padT - padB;
+    var max = Math.max.apply(null, data.map(function (d) { return d.v; })) * 1.22;
+    var gap = innerW / data.length, bw = Math.min(gap * 0.52, 70);
+    var s = '';
+    for (var t = 0; t <= 4; t++) {
+      var gv = max * t / 4, gy = padT + innerH - (gv / max) * innerH;
+      s += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + gy + '" y2="' + gy
+         + '" stroke="' + GRID + '" stroke-dasharray="' + (t === 0 ? '0' : '2 4') + '"/>';
+      s += '<text x="' + (padL - 8) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="10.5" fill="' + INK_L + '">' + Math.round(gv) + '</text>';
+    }
+    data.forEach(function (d, i) {
+      var x = padL + i * gap + (gap - bw) / 2;
+      var h = (d.v / max) * innerH, y = padT + innerH - h;
+      s += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + h + '" rx="3" fill="' + (d.color || color) + '"/>';
+      s += '<text x="' + (x + bw / 2) + '" y="' + (y - 22) + '" text-anchor="middle" font-size="12.5" font-weight="700" fill="' + INK + '">' + d.v + '</text>';
+      if (d.pct) {
+        s += '<text x="' + (x + bw / 2) + '" y="' + (y - 8) + '" text-anchor="middle" font-size="11" fill="' + INK_M + '">' + d.pct + '</text>';
+      }
+      s += '<text x="' + (x + bw / 2) + '" y="' + (H - 14) + '" text-anchor="middle" font-size="11.5" fill="' + INK_M + '">' + d.label + '</text>';
+    });
+    el(svgId).innerHTML = s;
+  }
+
+  /* ===================== DATA ===================== */
+
+  // Tipo Beneficiário × Sexo Biológico (stacked)
+  legend('leg-stacked', [{label:'Feminino', color:GREEN}, {label:'Masculino', color:LIME}]);
+  stackedBars('bar-stacked',
+    [{key:'tit', label:'Titular'}, {key:'dep', label:'Dependente'}],
+    [
+      {name:'Feminino', color:GREEN, data:{tit:460, dep:6}},
+      {name:'Masculino', color:LIME,  data:{tit:141, dep:2}}
+    ]
+  );
+
+  // Sexo Biológico donut
+  legend('leg-sexo', [{label:'Feminino', color:GREEN}, {label:'Masculino', color:LIME}]);
+  donut('donut-sexo', [{v:466, color:GREEN}, {v:143, color:LIME}], '609', [
+    {x:212, y:200, anchor:'start', name:'Feminino',  detail:'466 · 76,52%'},
+    {x:64,  y:74,  anchor:'end',   name:'Masculino', detail:'143 · 23,48%'}
+  ]);
+
+  // Tipo Beneficiário donut
+  legend('leg-tipo', [{label:'Titular', color:GREEN}, {label:'Dependente', color:AMBER}]);
+  donut('donut-tipo', [{v:601, color:GREEN}, {v:8, color:AMBER}], '609', [
+    {x:140, y:232, anchor:'middle', name:'Titular',    detail:'601 · 98,69%'},
+    {x:206, y:42,  anchor:'start',  name:'Dependente', detail:'8 · 1,31%'}
+  ]);
+
+  // Respondentes por Ano
+  vBars('bar-ano', [
+    {label:'2025', v:61,  pct:'10,0%'},
+    {label:'2026', v:548, pct:'90,0%'}
+  ], LIME);
+
+  // Respondentes por Mês
+  vBars('bar-mes', [
+    {label:'Jan', v:9},
+    {label:'Fev', v:14},
+    {label:'Mar', v:21},
+    {label:'Abr', v:17},
+    {label:'Mai', v:548, pct:'90,0%'}
+  ], LIME);
+
+  // Faixa Etária
+  vBars('bar-faixa', [
+    {label:'Até 39', v:264, pct:'43,3%', color:LIME},
+    {label:'40 a 59', v:338, pct:'55,5%', color:GREEN},
+    {label:'60 +',    v:7,  pct:'1,2%',  color:AMBER}
+  ]);
+
+  /* tab toggle (visual) */
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('active'); });
+      t.classList.add('active');
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

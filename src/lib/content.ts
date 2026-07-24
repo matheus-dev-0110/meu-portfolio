@@ -93,20 +93,20 @@ projects: {
                  • ROI operacional: reduzi horas de retrabalho na equipe de liderança.`
       },
       caseDashboards: {
-            title: "Prints & visões estáticas",
+            title: "Dashboards em miniatura",
             items: [
-            { name: "Capa Executiva", img: "/dashboards/capa-v2.png" },
-            { name: "KPIs de Disparos", img: "/dashboards/disparo-v2.png" },
-            { name: "KPIs de Retorno", img: "/dashboards/retorno-v2.png" }
+            { name: "Dashboard de Materiais", html: "/dashboards/dash_materiais.html" },
+            { name: "Panorama de Saúde", html: "/dashboards/panorama_saude.html" },
+            { name: "Pesquisa de Saúde", html: "/dashboards/pesquisa_saude.html" }
             ]
         },
 
         dashboards: {
             title: "+ Dashboards interativos",
             items: [
-            { name: "Gaio · Unimed Nacional", img: "/dashboards/capa-v2.png", html: "/dashboards/gaio-unimed.html" },
-            { name: "Pesquisa de Saúde", img: "/dashboards/dashssinergy.png", html: "/dashboards/pesquisa-saude.html" },
-            { name: "Gaio DataOS", img: "/dashboards/dashtelecom-v2.png", html: "/dashboards/gaio-dataos.html" }
+            { name: "Dashboard de Materiais", html: "/dashboards/dash_materiais.html" },
+            { name: "Panorama de Saúde", html: "/dashboards/panorama_saude.html" },
+            { name: "Pesquisa de Saúde", html: "/dashboards/pesquisa_saude.html" }
             ],
             backBtn: "Voltar"
         }
@@ -239,24 +239,22 @@ projects: {
                  • Operational ROI: decreased leadership rework by saving dozens of hours per month.`
       },
       caseDashboards: {
-            title: "Dashboards gerados a partir deste projeto",
+            title: "Dashboard previews",
             items: [
-            { name: "Capa Executiva", img: "/dashboards/capa.png" },
-            { name: "KPIs de Disparos", img: "/dashboards/disparo.png" },
-            { name: "KPIs de Retorno", img: "/dashboards/retorno.png" }
+            { name: "Materials Dashboard", html: "/dashboards/dash_materiais.html" },
+            { name: "Health Panorama", html: "/dashboards/panorama_saude.html" },
+            { name: "Health Research", html: "/dashboards/pesquisa_saude.html" }
             ]
         },
 
         dashboards: {
-            title: "+ Dashboards - Power BI",
+            title: "+ Interactive dashboards",
             items: [
-            { name: "Vendas & Conversão", img: "/dashboards/vendas.png" },
-            { name: "Marketing & ROI", img: "/dashboards/marketing.png" },
-            { name: "Operações & Produtividade", img: "/dashboards/operacoes.png" },
-            { name: "Financeiro & Forecast", img: "/dashboards/financeiro.png" },
-            { name: "Customer Analytics", img: "/dashboards/customer.png" }
+            { name: "Materials Dashboard", html: "/dashboards/dash_materiais.html" },
+            { name: "Health Panorama", html: "/dashboards/panorama_saude.html" },
+            { name: "Health Research", html: "/dashboards/pesquisa_saude.html" }
             ],
-            backBtn: "Voltar"
+            backBtn: "Back"
         }
         },
 
