@@ -199,7 +199,11 @@ export default function ProjectsSection() {
                 </div>
               ) : (
                 <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                  <Image src={dash.img ?? "/projects/pipeline-architecture.png"} alt={dash.name} fill className="object-cover" />
+                  {'img' in dash && dash.img ? (
+                    <Image src={dash.img} alt={dash.name} fill className="object-cover" />
+                  ) : (
+                    <Image src="/projects/pipeline-architecture.png" alt={dash.name} fill className="object-cover" />
+                  )}
                 </div>
               )}
             </div>
@@ -243,7 +247,11 @@ export default function ProjectsSection() {
                     </div>
                   ) : (
                     <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                      <Image src={dash.img ?? "/projects/pipeline-architecture.png"} alt={dash.name} fill className="object-cover" />
+                      {'img' in dash && dash.img ? (
+                        <Image src={dash.img} alt={dash.name} fill className="object-cover" />
+                      ) : (
+                        <Image src="/projects/pipeline-architecture.png" alt={dash.name} fill className="object-cover" />
+                      )}
                     </div>
                   )}
                   {'html' in dash && dash.html && (
