@@ -181,33 +181,33 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           className="mb-12 grid gap-5 md:grid-cols-3"
         >
-          {t.caseDashboards.items.slice(0, 3).map((dash) => (
-            <div
-              key={dash.name}
-              onClick={() => setSelectedDashboard(dash)}
-              className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
-            >
-              <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
-              {dash.html ? (
-                <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
-                  <iframe
-                    src={dash.html}
-                    title={dash.name}
-                    className="pointer-events-none h-full w-full"
-                    style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
-                  />
-                </div>
-              ) : (
-                <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                  {'img' in dash && dash.img ? (
-                    <Image src={dash.img} alt={dash.name} fill className="object-cover" />
-                  ) : (
-                    <Image src="/projects/pipeline-architecture.png" alt={dash.name} fill className="object-cover" />
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+          {t.caseDashboards.items.slice(0, 3).map((dash) => {
+            const previewImage = typeof dash.img === "string" ? dash.img : "/projects/pipeline-architecture.png"
+
+            return (
+              <div
+                key={dash.name}
+                onClick={() => setSelectedDashboard(dash)}
+                className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
+              >
+                <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
+                {dash.html ? (
+                  <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
+                    <iframe
+                      src={dash.html}
+                      title={dash.name}
+                      className="pointer-events-none h-full w-full"
+                      style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
+                    />
+                  </div>
+                ) : (
+                  <div className="relative h-44 w-full overflow-hidden rounded-lg">
+                    <Image src={previewImage} alt={dash.name} fill className="object-cover" />
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </motion.div>
 
         {/* ===== BOTÃO MAIS DASHBOARDS ===== */}
@@ -229,36 +229,36 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-10 grid gap-5 md:grid-cols-3"
             >
-              {t.dashboards.items.map((dash) => (
-                <div
-                  key={dash.name}
-                  onClick={() => setSelectedDashboard(dash)}
-                  className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
-                >
-                  <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
-                  {dash.html ? (
-                    <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
-                      <iframe
-                        src={dash.html}
-                        title={dash.name}
-                        className="pointer-events-none h-full w-full"
-                        style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="relative h-44 w-full overflow-hidden rounded-lg">
-                      {'img' in dash && dash.img ? (
-                        <Image src={dash.img} alt={dash.name} fill className="object-cover" />
-                      ) : (
-                        <Image src="/projects/pipeline-architecture.png" alt={dash.name} fill className="object-cover" />
-                      )}
-                    </div>
-                  )}
-                  {'html' in dash && dash.html && (
-                    <p className="mt-3 text-xs text-slate-500">Clique para abrir preview interativo.</p>
-                  )}
-                </div>
-              ))}
+              {t.dashboards.items.map((dash) => {
+                const previewImage = typeof dash.img === "string" ? dash.img : "/projects/pipeline-architecture.png"
+
+                return (
+                  <div
+                    key={dash.name}
+                    onClick={() => setSelectedDashboard(dash)}
+                    className="card card-hover cursor-pointer p-4 transition hover:scale-[1.02]"
+                  >
+                    <h4 className="mb-3 text-sm font-semibold text-white">{dash.name}</h4>
+                    {dash.html ? (
+                      <div className="relative h-44 w-full overflow-hidden rounded-lg bg-white">
+                        <iframe
+                          src={dash.html}
+                          title={dash.name}
+                          className="pointer-events-none h-full w-full"
+                          style={{ transform: "scale(0.7)", transformOrigin: "top left", width: "142%", height: "142%" }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative h-44 w-full overflow-hidden rounded-lg">
+                        <Image src={previewImage} alt={dash.name} fill className="object-cover" />
+                      </div>
+                    )}
+                    {dash.html && (
+                      <p className="mt-3 text-xs text-slate-500">Clique para abrir preview interativo.</p>
+                    )}
+                  </div>
+                )
+              })}
             </motion.div>
 
             <div className="mt-10 flex justify-center">
@@ -301,7 +301,7 @@ export default function ProjectsSection() {
                 />
               ) : (
                 <Image
-                  src={selectedDashboard.img}
+                  src={typeof selectedDashboard.img === "string" ? selectedDashboard.img : "/projects/pipeline-architecture.png"}
                   alt={selectedDashboard.name}
                   fill
                   className="object-contain"
